@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9948828399c2caf4298c20510d617ff8, type: 3}
+  m_Name: Chestplate Database
+  m_EditorClassIdentifier: 
+  allChestplate:
+  - name: Knight
+    chestpiece: {fileID: 21300000, guid: edf145a8644f19648a744c4616e9ae20, type: 3}
+  - name: Monk
+    chestpiece: {fileID: 21300000, guid: a5ffd81a4c832a149999a56672818b62, type: 3}
+  - name: Necro
+    chestpiece: {fileID: 21300000, guid: e6301890c1a51ad4bbba77ee3019acd3, type: 3}
+  - name: Ninja
+    chestpiece: {fileID: 21300000, guid: d626cc08c8570144daed3db056d9668c, type: 3}
+  - name: Priest
+    chestpiece: {fileID: 21300000, guid: 6fca1615418278246bdaaa23a5e201da, type: 3}
+  - name: Ranger
+    chestpiece: {fileID: 21300000, guid: 7e77530130f0bfb4b816964bb9def6df, type: 3}
+  - name: Wizard
+    chestpiece: {fileID: 21300000, guid: 9cf1a091a21655e428a656d90b0f53d7, type: 3}
