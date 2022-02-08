@@ -36,6 +36,6 @@ public class UICard : MonoBehaviour
     public void OnClick()
     {
         //Tell the "shop"
-        shopRef.OnCardClick(bodyData, helmetData, chestplateData, weaponData);
+        shopRef.OnCardClick(this, bodyData, helmetData, chestplateData, weaponData);
     }
 }

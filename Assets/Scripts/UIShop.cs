@@ -25,12 +25,17 @@ public class UIShop : MonoBehaviour
     {
         for(int i = 0; i < allCards.Count; i++)
         {
+            if(!allCards[i].gameObject.activeSelf)
+                allCards[i].gameObject.SetActive(true);
+            
             allCards[i].Setup(cBodyDb.allBodies[Random.Range(0, cBodyDb.allBodies.Count)], cHelmetDb.allHelmets[Random.Range(0, cHelmetDb.allHelmets.Count)], cChestplateDb.allChestplate[Random.Range(0, cChestplateDb.allChestplate.Count)], cWeaponDb.allWeapons[Random.Range(0, cWeaponDb.allWeapons.Count)], this);
         }
     }
 
-    public void OnCardClick(BodyDatabaseSO.BodyData bodyCData, HelmetDatabaseSO.HelmetData helmetCData, ChestplateDatabaseSO.ChestplateData chestplateCData, WeaponDatabaseSO.WeaponData weaponCData)
+    public void OnCardClick(UICard card, BodyDatabaseSO.BodyData bodyCData, HelmetDatabaseSO.HelmetData helmetCData, ChestplateDatabaseSO.ChestplateData chestplateCData, WeaponDatabaseSO.WeaponData weaponCData)
     {
-        Debug.Log("Card clicked!");
+        card.gameObject.SetActive(false);
+        
+        GameManager.Instance.OnEntitySelected(bodyCData, helmetCData, chestplateCData, weaponCData);
     }
 }
