@@ -30,8 +30,9 @@ public class BaseEntity : MonoBehaviour
     public Team UnitTeam => myTeam;
     public Node CurrentNode => currentNode;
     
+    protected List<Node> pather = new List<Node>();
     protected bool HasEnemy => currentTarget != null;
-    protected bool IsInRange => HasEnemy && Vector3.Distance(this.transform.position, currentTarget.transform.position) <= (range + 0.3f);
+    protected bool IsInRange => HasEnemy && pather.Count <= (range + 1) && pather.Count != 0;
     protected bool moving;
     protected Node destination;
 
@@ -69,6 +70,7 @@ public class BaseEntity : MonoBehaviour
     protected void FindTarget()
     {
         var allEnemies = GameManager.Instance.GetEntitiesAgainst(myTeam);
+        //Debug.Log(allEnemies[0].gameObject.name+", "+allEnemies[1].gameObject.name+", "+allEnemies[2].gameObject.name);
         float minDistance = Mathf.Infinity;
         BaseEntity entity = null;
         foreach (BaseEntity e in allEnemies)
@@ -119,8 +121,9 @@ public class BaseEntity : MonoBehaviour
                 return;
 
             //find path to destination
-
+            
             var path = GridManager.Instance.GetPath(currentNode, candidateDestination);
+            pather = path;
             if (path == null || path.Count <= 1)
                 return;
 
