@@ -57,67 +57,78 @@ public class Graph
         return Mathf.Infinity;
     }
 
-    public List<Node> GetShortestPath(Node start, Node end)
+    public virtual List<Node> GetShortestPath(Node start, Node end)
     {
         List<Node> path = new List<Node>();
 
-        if(start == end)
+        // If the start and end are same node, we can return the start node
+        if (start == end)
         {
             path.Add(start);
             return path;
         }
 
-        List<Node> openList = new List<Node>();
+        // The list of unvisited nodes
+        List<Node> unvisited = new List<Node>();
+
+        // Previous nodes in optimal path from source
         Dictionary<Node, Node> previous = new Dictionary<Node, Node>();
+
+        // The calculated distances, set all to Infinity at start, except the start Node
         Dictionary<Node, float> distances = new Dictionary<Node, float>();
 
-        for(int i = 0; i<nodes.Count; i++)
+        for (int i = 0; i < nodes.Count; i++)
         {
-            openList.Add(nodes[i]);
+            Node node = nodes[i];
+            unvisited.Add(node);
 
-            distances.Add(nodes[i],float.PositiveInfinity); //Default distance is infinity
+            // Setting the node distance to Infinity
+            distances.Add(node, float.MaxValue);
         }
 
-        distances[start] = 0f; //Distance from the same node is zero
+        // Set the starting Node distance to zero
+        distances[start] = 0f;
+        while (unvisited.Count != 0)
+        {            
+            // Getting the Node with smallest distance
+            unvisited = unvisited.OrderBy(node => distances[node]).ToList();
+            Node current = unvisited[0];
+            unvisited.Remove(current);
 
-        while(openList.Count > 0)
-        {
-            //Get the node with smaller distance
-            openList.OrderBy(x => distances[x]).ToList();
-            Node current = openList[0];
-            openList.Remove(current);
-
-            if(current == end)
+            // When the current node is equal to the end node, then we can break and return the path
+            if (current == end)
             {
-                //Done!
-                //Build Path
-                while(previous.ContainsKey(current))
+                // Construct the shortest path
+                while (previous.ContainsKey(current))
                 {
-                    path.Insert(0, current);
+                    // Insert the node onto the final result
+                     path.Insert(0, current);
+                    //Traverse from start to end
                     current = previous[current];
-
                 }
 
-                //Add the start node too
+                //Insert the source onto the final result
                 path.Insert(0, current);
                 break;
             }
 
+            // Looping through the Node connections (neighbors) and where the connection (neighbor) is available at unvisited list
             foreach(Node neighbor in Neighbors(current))
             {
-                float distance = Distance(current, neighbor);
-                
-                float candidateNewDistance = distances[current] + distance;
+                // Getting the distance between the current node and the connection (neighbor)
+                float length = Vector3.Distance(current.worldPosition, neighbor.worldPosition);
 
-                //Is new path shorter?
-                if(candidateNewDistance < distances[neighbor])
+                // The distance from start node to this connection (neighbor) of current node
+                float alt = distances[current] + length;
+
+                // A shorter path to the connection (neighbor) has been found
+                if (alt < distances[neighbor])
                 {
-                    distances[neighbor] = candidateNewDistance;
+                    distances[neighbor] = alt;
                     previous[neighbor] = current;
                 }
             }
         }
-
         return path;
     }
 }

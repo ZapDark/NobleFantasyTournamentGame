@@ -11,7 +11,7 @@ public class MeleeEntity : BaseEntity
         {
             FindTarget();
         }
-        
+
         if(IsInRange && !moving)
         {
             //Attack!
