@@ -1,0 +1,20 @@
+{
+    "attributes": [
+        {
+            "Trait_type": "Head",
+            "Value": "Ninja"
+        },
+        {
+            "Trait_type": "Body",
+            "Value": "Ranger"
+        },
+        {
+            "Trait_type": "Weapon",
+            "Value": "Priest"
+        },
+        {
+            "Trait_type": "Race",
+            "Value": "Demon"
+        }
+    ]
+}
