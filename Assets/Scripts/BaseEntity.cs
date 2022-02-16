@@ -30,11 +30,12 @@ public class BaseEntity : MonoBehaviour
     public Team UnitTeam => myTeam;
     public Node CurrentNode => currentNode;
     
-    protected List<Node> pather = new List<Node>();
+    protected bool inRangeEnemy = false;
     protected bool HasEnemy => currentTarget != null;
-    protected bool IsInRange => HasEnemy && pather.Count <= (range + 1) && pather.Count != 0;
+    protected bool IsInRange => HasEnemy && inRangeEnemy;
     protected bool moving;
     protected Node destination;
+    protected int xOff = 1;
 
     public void Setup(Team team, Node currentNode)
     {
@@ -52,6 +53,9 @@ public class BaseEntity : MonoBehaviour
         currentNode.SetOccupied(true);
         healthbar = Instantiate(barPrefab, this.transform);
         healthbar.Setup(this.transform, baseHealth);
+        
+        if(myTeam == Team.Team2)
+            xOff = -1;
     }
 
     public void TakeDamage(int amount)
@@ -75,14 +79,15 @@ public class BaseEntity : MonoBehaviour
         BaseEntity entity = null;
         foreach (BaseEntity e in allEnemies)
         {
-            if(Vector3.Distance(e.transform.position, this.transform.position) <= minDistance)
+            if(Vector3.Distance(e.currentNode.mapPosition, this.currentNode.mapPosition) <= minDistance)
             {
-                minDistance = Vector3.Distance(e.transform.position, this.transform.position);
+                minDistance = Vector3.Distance(e.currentNode.mapPosition, this.currentNode.mapPosition);
                 entity = e;
             }
         }
 
         currentTarget = entity;
+        inRangeEnemy = (minDistance <= range + 0.9f);
     }
 
     protected bool MoveTowards(Node nextNode)
@@ -98,6 +103,21 @@ public class BaseEntity : MonoBehaviour
         return false;
     }
 
+    protected void GetNodesInFront(int xOffset)
+    {
+        Vector3 destinationPos = new Vector3(this.currentNode.mapPosition.x + xOffset, this.currentNode.mapPosition.y, this.currentNode.mapPosition.z);
+        List<Node> candidates = GridManager.Instance.GetNodesCloseTo(this.currentNode);
+
+        foreach (Node cand in candidates)
+        {
+            if (cand.mapPosition == destinationPos)
+            {    
+                destination = cand;
+                break;
+            }
+        }
+    }
+
     protected void GetInRange()
     {
         if (currentTarget == null)
@@ -105,8 +125,11 @@ public class BaseEntity : MonoBehaviour
 
         if(!moving)
         {
-            Node candidateDestination = null;
-            List<Node> candidates = GridManager.Instance.GetNodesCloseTo(currentTarget.currentNode); //Get a neighbors of a node
+            destination = null;
+
+            GetNodesInFront(xOff);
+
+            /*List<Node> candidates = GridManager.Instance.GetNodesCloseTo(currentTarget.currentNode); //Get a neighbors of a node
             candidates = candidates.OrderBy(x => Vector3.Distance(x.worldPosition, this.transform.position)).ToList();
             for(int i = 0; i < candidates.Count; i++)
             {
@@ -116,14 +139,15 @@ public class BaseEntity : MonoBehaviour
                     break;
                 }
             }
+            */
 
-            if(candidateDestination == null)
+            if(destination == null)
                 return;
-
+            
             //find path to destination
             
-            var path = GridManager.Instance.GetPath(currentNode, candidateDestination);
-            pather = path;
+            var path = GridManager.Instance.GetPath(currentNode, destination);
+
             if (path == null || path.Count <= 1)
                 return;
 
@@ -151,7 +175,7 @@ public class BaseEntity : MonoBehaviour
         if(!canAttack)
             return;
 
-        waitBetweenAttack = 1 / attackSpeed;
+        waitBetweenAttack = attackSpeed / 2;
         //Wait for next attack
         StartCoroutine(WaitCoroutine());
     }

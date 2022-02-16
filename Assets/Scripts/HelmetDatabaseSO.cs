@@ -10,6 +10,7 @@ public class HelmetDatabaseSO : ScriptableObject
     {
         public string name;
         public Sprite headpiece;
+        public int hpIncrease;
     }
 
     public List<HelmetData> allHelmets;

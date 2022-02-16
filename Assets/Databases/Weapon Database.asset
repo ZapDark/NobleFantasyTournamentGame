@@ -15,15 +15,36 @@ MonoBehaviour:
   allWeapons:
   - name: Bow
     weapon: {fileID: 21300000, guid: 70dc2a02eccfb934ea8c2d96079cfe27, type: 3}
+    damage: 3
+    range: 5
+    attackSpeed: 2
   - name: Sword
     weapon: {fileID: 21300000, guid: cde50fb23af8e0d40883ca4578f0e32a, type: 3}
+    damage: 5
+    range: 1
+    attackSpeed: 6
   - name: Monk
     weapon: {fileID: 21300000, guid: ff0af97f1638898499f3dd66d9660949, type: 3}
+    damage: 4
+    range: 1
+    attackSpeed: 2
   - name: Torch
     weapon: {fileID: 21300000, guid: 76ec229e3177aea48a7cbfef48f9e073, type: 3}
+    damage: 3
+    range: 2
+    attackSpeed: 3
   - name: Kunai
     weapon: {fileID: 21300000, guid: 94661487950837a49ae2524c1878dad3, type: 3}
+    damage: 6
+    range: 3
+    attackSpeed: 4
   - name: Healing Staff
     weapon: {fileID: 21300000, guid: e63b4467309b05445b5f192250eb48ff, type: 3}
+    damage: 0
+    range: 0
+    attackSpeed: 0
   - name: Magic Staff
     weapon: {fileID: 21300000, guid: 473c33448e1755d44b0b1e720f2977ef, type: 3}
+    damage: 2
+    range: 1
+    attackSpeed: 6
