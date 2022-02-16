@@ -10,6 +10,7 @@ public class ChestplateDatabaseSO : ScriptableObject
     {
         public string name;
         public Sprite chestpiece;
+        public int hpIncrease;
     }
 
     public List<ChestplateData> allChestplate;

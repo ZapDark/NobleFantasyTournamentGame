@@ -15,15 +15,22 @@ MonoBehaviour:
   allChestplate:
   - name: Knight
     chestpiece: {fileID: 21300000, guid: edf145a8644f19648a744c4616e9ae20, type: 3}
+    hpIncrease: 25
   - name: Monk
     chestpiece: {fileID: 21300000, guid: a5ffd81a4c832a149999a56672818b62, type: 3}
+    hpIncrease: 30
   - name: Necro
     chestpiece: {fileID: 21300000, guid: e6301890c1a51ad4bbba77ee3019acd3, type: 3}
+    hpIncrease: 10
   - name: Ninja
     chestpiece: {fileID: 21300000, guid: d626cc08c8570144daed3db056d9668c, type: 3}
+    hpIncrease: 20
   - name: Priest
     chestpiece: {fileID: 21300000, guid: 6fca1615418278246bdaaa23a5e201da, type: 3}
+    hpIncrease: 5
   - name: Ranger
     chestpiece: {fileID: 21300000, guid: 7e77530130f0bfb4b816964bb9def6df, type: 3}
+    hpIncrease: 10
   - name: Wizard
     chestpiece: {fileID: 21300000, guid: 9cf1a091a21655e428a656d90b0f53d7, type: 3}
+    hpIncrease: 15

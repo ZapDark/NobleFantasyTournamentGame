@@ -10,6 +10,9 @@ public class WeaponDatabaseSO : ScriptableObject
     {
         public string name;
         public Sprite weapon;
+        public int damage;
+        public int range;
+        public float attackSpeed;
     }
 
     public List<WeaponData> allWeapons;

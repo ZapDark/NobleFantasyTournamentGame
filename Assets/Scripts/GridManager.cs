@@ -78,7 +78,7 @@ public class GridManager : Manager<GridManager>
         {
             foreach(Node to in allNodes)
             {
-                if(Vector3.Distance(from.mapPosition, to.mapPosition) < 1.3f && from != to)
+                if(Mathf.Abs(from.mapPosition.x - to.mapPosition.x) < 1.3f && from != to)
                 {
                     graph.AddEdge(from, to);
                 }

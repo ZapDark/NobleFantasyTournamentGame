@@ -15,15 +15,22 @@ MonoBehaviour:
   allHelmets:
   - name: Knight
     headpiece: {fileID: 21300000, guid: 0488e727a203f224f9184df3fd5bf299, type: 3}
+    hpIncrease: 25
   - name: Monk
     headpiece: {fileID: 21300000, guid: 37db2feab81d09941a82bad2b7cf2bf2, type: 3}
+    hpIncrease: 30
   - name: Necro
     headpiece: {fileID: 21300000, guid: e70cf77e5547d5a4ea41ada76233f45a, type: 3}
+    hpIncrease: 10
   - name: Ninja
     headpiece: {fileID: 21300000, guid: 9a10def693dd60248a9aee6beba8fd96, type: 3}
+    hpIncrease: 20
   - name: Priest
     headpiece: {fileID: 21300000, guid: 0ac32a0479847b541abeceda5689a774, type: 3}
+    hpIncrease: 5
   - name: Ranger
     headpiece: {fileID: 21300000, guid: 29cd859f3c7403e468f8cef35022fa14, type: 3}
+    hpIncrease: 10
   - name: Wizard
     headpiece: {fileID: 21300000, guid: 50c05e0720333d148af447da81d33151, type: 3}
+    hpIncrease: 15
