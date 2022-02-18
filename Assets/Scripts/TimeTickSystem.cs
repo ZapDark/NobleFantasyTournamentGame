@@ -12,7 +12,7 @@ public class TimeTickSystem : MonoBehaviour
     
     public static event EventHandler<OnTickEventArgs> OnTick;
 
-    private const float TICK_TIMER_MAX = .2f;
+    private const float TICK_TIMER_MAX = .125f;
 
     private int tick;
     private float tickTimer;
@@ -28,6 +28,7 @@ public class TimeTickSystem : MonoBehaviour
         {
             tickTimer -= TICK_TIMER_MAX;
             tick++;
+            //Debug.Log("tick: " + tick);
             if (OnTick != null) OnTick(this, new OnTickEventArgs { tick = tick });
         }
     }

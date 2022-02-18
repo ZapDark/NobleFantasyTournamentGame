@@ -18,6 +18,8 @@ public class BaseEntity : MonoBehaviour
     public float attackSpeed = 1f; //Attacks per second
     public float movementSpeed = 1f;
 
+    public int actionTick = 0;
+
     protected Team myTeam;
     protected BaseEntity currentTarget = null;
     protected Node currentNode;
@@ -39,6 +41,8 @@ public class BaseEntity : MonoBehaviour
 
     public void Setup(Team team, Node currentNode)
     {
+        actionTick = 0;
+        TimeTickSystem.OnTick += TimeTickSystem_OnTick;
         myTeam = team;
         if(myTeam == Team.Team2)
         {
@@ -68,6 +72,7 @@ public class BaseEntity : MonoBehaviour
             currentNode.SetOccupied(false);
             //Informs the Game Manager
             GameManager.Instance.UnitDead(this);
+            destination.SetOccupied(false);
         }
     }
 
@@ -170,20 +175,43 @@ public class BaseEntity : MonoBehaviour
         }
     }
 
-    protected virtual void Attack()
+    /*protected virtual void Attack()
     {
         if(!canAttack)
             return;
 
         waitBetweenAttack = attackSpeed / 2;
         //Wait for next attack
-        StartCoroutine(WaitCoroutine());
-    }
+        //StartCoroutine(WaitCoroutine());
+    }*/
 
-    IEnumerator WaitCoroutine()
+    /*IEnumerator WaitCoroutine()
     {
         canAttack = false;
         yield return new WaitForSeconds(waitBetweenAttack);
         canAttack = true;
+    }*/
+
+    private void TimeTickSystem_OnTick(object sender, TimeTickSystem.OnTickEventArgs e)
+    {
+        if (!dead)
+        {
+            //Debug.Log("actionTick = " + actionTick + " Moving = " + moving + " | IsInRange = " + IsInRange);
+            FindTarget();
+            if (IsInRange && !moving)
+            {
+                actionTick += 1;
+                if (actionTick >= attackSpeed)
+                {
+                    //Attack();
+                    actionTick = 0;
+                    currentTarget.TakeDamage(baseDamage);
+                }
+            }
+            else
+            {
+                GetInRange();
+            }
+        }
     }
 }
