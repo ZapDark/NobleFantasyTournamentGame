@@ -273,7 +273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7225942150273024921}
-  - component: {fileID: 7225942150273024920}
+  - component: {fileID: -5079565041085669607}
   m_Layer: 0
   m_Name: unitPrefab
   m_TagString: Untagged
@@ -296,7 +296,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7225942150273024920
+--- !u!114 &-5079565041085669607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7225942150273024923}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b05c84581c7e9604087b606523df0e7e, type: 3}
+  m_Script: {fileID: 11500000, guid: a5b18eb43ed29714b985e51ce9ff5a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   barPrefab: {fileID: 5422773664318616500, guid: e0fe7e5a8c5696e48a8a5a23c4002019, type: 3}
@@ -317,7 +317,8 @@ MonoBehaviour:
   baseHealth: 100
   range: 1
   attackSpeed: 1
-  movementSpeed: 1
+  movementSpeed: 10
+  actionTick: 0
 --- !u!1 &7225942150811708147
 GameObject:
   m_ObjectHideFlags: 0

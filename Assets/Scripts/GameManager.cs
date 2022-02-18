@@ -16,6 +16,10 @@ public class GameManager : Manager<GameManager>
 
     void Start()
     {
+        TimeTickSystem.OnTick += delegate (object sender, TimeTickSystem.OnTickEventArgs e) 
+        {
+            //Debug.Log("tick: " + e.tick);
+        };
         // Create the 2 teams.
         entitiesByTeam.Add(Team.Team1, new List<BaseEntity>());
         entitiesByTeam.Add(Team.Team2, new List<BaseEntity>());
