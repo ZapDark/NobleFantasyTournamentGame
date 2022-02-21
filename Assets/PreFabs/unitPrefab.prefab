@@ -317,7 +317,7 @@ MonoBehaviour:
   baseHealth: 100
   range: 1
   attackSpeed: 1
-  movementSpeed: 10
+  movementSpeed: 3
   actionTick: 0
 --- !u!1 &7225942150811708147
 GameObject:

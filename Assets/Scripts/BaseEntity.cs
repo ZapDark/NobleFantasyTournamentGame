@@ -95,17 +95,11 @@ public class BaseEntity : MonoBehaviour
         inRangeEnemy = (minDistance <= range + 0.9f);
     }
 
-    protected bool MoveTowards(Node nextNode)
+    protected void MoveTowards(Node nextNode)
     {
         Vector3 direction = (nextNode.worldPosition - this.transform.position);
-        if(direction.sqrMagnitude <= 0.005f)
-        {
-            transform.position = nextNode.worldPosition;
-            return true;
-        }
-
-        this.transform.position += direction.normalized * movementSpeed * Time.deltaTime;
-        return false;
+        if(direction.sqrMagnitude <= 1.3f)
+            this.transform.position = nextNode.worldPosition;
     }
 
     protected void GetNodesInFront(int xOffset)
@@ -127,90 +121,47 @@ public class BaseEntity : MonoBehaviour
     {
         if (currentTarget == null)
             return;
+        
+        GetNodesInFront(xOff);
 
-        if(!moving)
+        if(destination == null)
+            return;
+        
+        if (actionTick >= movementSpeed)
         {
-            destination = null;
-
-            GetNodesInFront(xOff);
-
-            /*List<Node> candidates = GridManager.Instance.GetNodesCloseTo(currentTarget.currentNode); //Get a neighbors of a node
-            candidates = candidates.OrderBy(x => Vector3.Distance(x.worldPosition, this.transform.position)).ToList();
-            for(int i = 0; i < candidates.Count; i++)
-            {
-                if(!candidates[i].IsOccupied)
-                {
-                    candidateDestination = candidates[i];
-                    break;
-                }
-            }
-            */
-
-            if(destination == null)
-                return;
-            
-            //find path to destination
-            
-            var path = GridManager.Instance.GetPath(currentNode, destination);
-
-            if (path == null || path.Count <= 1)
-                return;
-
-            if(path[1].IsOccupied)
+            if(destination.IsOccupied)
                 return;
             
             //Take ownership of the node
-            path[1].SetOccupied(true);
-            destination = path[1];
-        }
+            destination.SetOccupied(true);
+            
+            MoveTowards(destination);
 
-        moving = !MoveTowards(destination);
-        if(!moving)
-        {
-            //Target reached
-            //Free previous node
             currentNode.SetOccupied(false);
             //Update current node
             currentNode = destination;
+            actionTick = 0;
         }
     }
-
-    /*protected virtual void Attack()
-    {
-        if(!canAttack)
-            return;
-
-        waitBetweenAttack = attackSpeed / 2;
-        //Wait for next attack
-        //StartCoroutine(WaitCoroutine());
-    }*/
-
-    /*IEnumerator WaitCoroutine()
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(waitBetweenAttack);
-        canAttack = true;
-    }*/
 
     private void TimeTickSystem_OnTick(object sender, TimeTickSystem.OnTickEventArgs e)
     {
         if (!dead)
         {
-            //Debug.Log("actionTick = " + actionTick + " Moving = " + moving + " | IsInRange = " + IsInRange);
             FindTarget();
-            if (IsInRange && !moving)
+            actionTick += 1;
+            if (actionTick >= attackSpeed)
             {
-                actionTick += 1;
-                if (actionTick >= attackSpeed)
+                
+                if (IsInRange)
                 {
-                    //Attack();
                     actionTick = 0;
                     currentTarget.TakeDamage(baseDamage);
                 }
-            }
-            else
-            {
-                GetInRange();
+                else
+                {
+                    GetInRange();
+                }
             }
         }
     }

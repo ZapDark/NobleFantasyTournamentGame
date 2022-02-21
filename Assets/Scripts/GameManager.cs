@@ -32,6 +32,7 @@ public class GameManager : Manager<GameManager>
         newEntity.baseDamage = weaponData.damage;
         newEntity.range = weaponData.range;
         newEntity.attackSpeed = weaponData.attackSpeed;
+        newEntity.movementSpeed = helmetData.movementSpeed + 5;
         newEntity.baseHealth = newEntity.baseHealth + helmetData.hpIncrease + chestplateData.hpIncrease;
         
         newEntity.body.sprite = bodyData.body;
