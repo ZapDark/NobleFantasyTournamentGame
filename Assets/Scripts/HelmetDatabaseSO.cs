@@ -11,6 +11,7 @@ public class HelmetDatabaseSO : ScriptableObject
         public string name;
         public Sprite headpiece;
         public int hpIncrease;
+        public int movementSpeed;
     }
 
     public List<HelmetData> allHelmets;
