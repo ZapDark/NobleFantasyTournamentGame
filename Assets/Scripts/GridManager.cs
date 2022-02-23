@@ -17,7 +17,7 @@ public class GridManager : Manager<GridManager>
         InitializeGraph();
         startPositionPerTeam = new Dictionary<Team, int>();
         startPositionPerTeam.Add(Team.Team1, 0);
-        startPositionPerTeam.Add(Team.Team2, graph.nodes.Count - 1);
+        startPositionPerTeam.Add(Team.Team2, graph.Nodes.Count - 1);
     }
     
     public Node GetFreeNode(Team forTeam)
@@ -25,12 +25,12 @@ public class GridManager : Manager<GridManager>
         int startIndex = startPositionPerTeam[forTeam];
         int currentIndex = startIndex;
 
-        while(graph.nodes[currentIndex].IsOccupied)
+        while(graph.Nodes[currentIndex].IsOccupied)
         {
             if (startIndex == 0)
             {
                 currentIndex++;
-                if(currentIndex == graph.nodes.Count)
+                if(currentIndex == graph.Nodes.Count)
                     return null;
             }
             else
@@ -41,7 +41,7 @@ public class GridManager : Manager<GridManager>
             }
         }
 
-        return graph.nodes[currentIndex];
+        return graph.Nodes[currentIndex];
     }
 
     public List<Node> GetPath(Node from, Node to)
@@ -52,6 +52,21 @@ public class GridManager : Manager<GridManager>
     public List<Node> GetNodesCloseTo(Node to)
     {
         return graph.Neighbors(to);
+    }
+
+    public Node GetNodeForPosition(Vector3 vect)
+    {
+        var allNodes = graph.Nodes;
+
+        for (int i = 0; i < allNodes.Count; i++)
+        {
+            if (grid.WorldToCell(vect) == allNodes[i].mapPosition)
+            {
+                return allNodes[i];
+            }
+        }
+
+        return null;
     }
 
     private void InitializeGraph()
@@ -72,7 +87,7 @@ public class GridManager : Manager<GridManager>
             }
         }
 
-        var allNodes = graph.nodes;
+        var allNodes = graph.Nodes;
 
         foreach(Node from in allNodes)
         {
@@ -97,14 +112,14 @@ public class GridManager : Manager<GridManager>
             return;
         }
 
-        var allEdges = graph.edges;
+        var allEdges = graph.Edges;
 
         foreach(Edge e in allEdges)
         {
             Debug.DrawLine(e.from.worldPosition, e.to.worldPosition, Color.black, 1);
         }
 
-        var allNodes = graph.nodes;
+        var allNodes = graph.Nodes;
         foreach(Node n in allNodes)
         {
             Gizmos.color = n.IsOccupied ? Color.red : Color.green;

@@ -76,6 +76,11 @@ public class BaseEntity : MonoBehaviour
         }
     }
 
+    public void SetCurrentNode(Node node)
+    {
+        currentNode = node;
+    }
+
     protected void FindTarget()
     {
         var allEnemies = GameManager.Instance.GetEntitiesAgainst(myTeam);

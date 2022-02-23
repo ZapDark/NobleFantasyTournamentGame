@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class Graph
 {
-    public List<Node> nodes;
-    public List<Edge> edges;
+    private List<Node> nodes;
+    private List<Edge> edges;
+
+    public List<Node> Nodes => nodes;
+    public List<Edge> Edges => edges;
 
     public Graph()
     {

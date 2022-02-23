@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Body Database
   m_EditorClassIdentifier: 
   allBodies:
-  - prefab: {fileID: -5079565041085669607, guid: 99582c1404527da4b8d78d135c3907b4, type: 3}
+  - prefab: {fileID: 7929890744840468783, guid: 99582c1404527da4b8d78d135c3907b4, type: 3}
     name: Human
     body: {fileID: 21300000, guid: a10a1bdb8204f6f4b868efc5f263b479, type: 3}
-  - prefab: {fileID: -5079565041085669607, guid: 99582c1404527da4b8d78d135c3907b4, type: 3}
+  - prefab: {fileID: 7929890744840468783, guid: 99582c1404527da4b8d78d135c3907b4, type: 3}
     name: Demon
     body: {fileID: 21300000, guid: 6dd9799ca4e6291459f0e8dbb2df7b4c, type: 3}
