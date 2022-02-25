@@ -35,6 +35,10 @@ public class UIShop : MonoBehaviour
     public void OnCardClick(UICard card, BodyDatabaseSO.BodyData bodyCData, HelmetDatabaseSO.HelmetData helmetCData, ChestplateDatabaseSO.ChestplateData chestplateCData, WeaponDatabaseSO.WeaponData weaponCData)
     {
         card.gameObject.SetActive(false);
+
+        //Debug.Log(transform.GetChild(0).GetChild(0).GetComponentsInChildren<Transform>().GetLength(0));
+
+        this.gameObject.SetActive(transform.GetChild(0).GetChild(0).GetComponentsInChildren<Transform>().GetLength(0) > 1);
         
         GameManager.Instance.OnEntitySelected(bodyCData, helmetCData, chestplateCData, weaponCData);
     }

@@ -69,7 +69,7 @@ public class Draggable : MonoBehaviour
 
         if (tileUnder != null)
         {
-            validTile.SetHighlight(true, !GridManager.Instance.GetNodeForPosition(tileUnder).IsOccupied, tileUnder);
+            validTile.SetHighlight(true, (!GridManager.Instance.GetNodeForPosition(tileUnder).IsOccupied || GridManager.Instance.GetNodeForPosition(tileUnder).worldPosition == oldPosition), tileUnder);
 
             /*if (previousTile != nullVector && tileUnder != previousTile)
             {
