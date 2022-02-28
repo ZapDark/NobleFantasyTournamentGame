@@ -11,9 +11,12 @@ public class BaseEntity : MonoBehaviour
     public SpriteRenderer chestpiece;
     public SpriteRenderer weapon;
 
+    public string weaponName;
+    public Animator atkAnimator;
+
     public int baseDamage = 5;
     public int baseHealth = 100;
-    [Range(1,5)]
+
     public int range = 1;
     public float attackSpeed = 1f; //Attacks per second
     public float movementSpeed = 1f;
@@ -160,11 +163,15 @@ public class BaseEntity : MonoBehaviour
                 
                 if (IsInRange)
                 {
+                    atkAnimator.SetBool("IsAttacking", true);
+                    atkAnimator.SetBool("Sword", (weaponName == "Sword"));
+
                     actionTick = 0;
                     currentTarget.TakeDamage(baseDamage);
                 }
                 else
                 {
+                    atkAnimator.SetBool("IsAttacking", false);
                     GetInRange();
                 }
             }

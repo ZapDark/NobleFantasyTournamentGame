@@ -137,6 +137,8 @@ MonoBehaviour:
   headpiece: {fileID: 3532411072418896028}
   chestpiece: {fileID: 4749436086387708416}
   weapon: {fileID: 5010902077013090699}
+  weaponName: Sword
+  atkAnimator: {fileID: 8298944044272620302}
   baseDamage: 5
   baseHealth: 100
   range: 1
@@ -349,6 +351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 189580397648944024}
   - component: {fileID: 5010902077013090699}
+  - component: {fileID: 8298944044272620302}
   m_Layer: 0
   m_Name: weapon
   m_TagString: Untagged
@@ -426,6 +429,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8298944044272620302
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6364681492422306658}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 814b94d6870720b42b352b4e26721d8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8065178459764010063
 GameObject:
   m_ObjectHideFlags: 0
