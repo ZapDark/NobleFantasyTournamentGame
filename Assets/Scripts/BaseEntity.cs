@@ -63,6 +63,14 @@ public class BaseEntity : MonoBehaviour
         
         if(myTeam == Team.Team2)
             xOff = -1;
+
+        atkAnimator.SetBool("Sword", (weaponName == "Sword"));
+        atkAnimator.SetBool("Kunai", (weaponName == "Kunai"));
+        atkAnimator.SetBool("Healing Staff", (weaponName == "Healing Staff"));
+        atkAnimator.SetBool("Monk Fist", (weaponName == "Monk"));
+        atkAnimator.SetBool("Necro Torch", (weaponName == "Torch"));
+        atkAnimator.SetBool("Bow", (weaponName == "Bow"));
+        atkAnimator.SetBool("Magic Staff", (weaponName == "Magic Staff"));
     }
 
     public void TakeDamage(int amount)
@@ -164,7 +172,6 @@ public class BaseEntity : MonoBehaviour
                 if (IsInRange)
                 {
                     atkAnimator.SetBool("IsAttacking", true);
-                    atkAnimator.SetBool("Sword", (weaponName == "Sword"));
 
                     actionTick = 0;
                     currentTarget.TakeDamage(baseDamage);
