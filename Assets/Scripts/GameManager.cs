@@ -39,6 +39,7 @@ public class GameManager : Manager<GameManager>
         newEntity.headpiece.sprite = helmetData.headpiece;
         newEntity.chestpiece.sprite = chestplateData.chestpiece;
         newEntity.weapon.sprite = weaponData.weapon;
+        newEntity.weaponName = weaponData.name;
 
         entitiesByTeam[Team.Team1].Add(newEntity);
 
@@ -82,6 +83,7 @@ public class GameManager : Manager<GameManager>
             newEntity.headpiece.sprite = helmetData.headpiece;
             newEntity.chestpiece.sprite = chestplateData.chestpiece;
             newEntity.weapon.sprite = weaponData.weapon;
+            newEntity.weaponName = weaponData.name;
 
             entitiesByTeam[Team.Team2].Add(newEntity);
 
