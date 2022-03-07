@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 8108202703028404881}
-  offset: {x: -0.2, y: 3, z: 0}
+  offset: {x: -0.5, y: 3, z: 0}
 --- !u!1 &6982732337997932716
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +118,7 @@ SpriteRenderer:
   m_SortingLayerID: -100627829
   m_SortingLayer: 1
   m_SortingOrder: 11
-  m_Sprite: {fileID: 21300000, guid: e6b60159550cc8c409d8d3456cf4cdad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c8185d24ed831ca499c7428775ebad35, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -200,7 +200,7 @@ SpriteRenderer:
   m_SortingLayerID: -100627829
   m_SortingLayer: 1
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: f8e8d5ea4038cc04babe5658b724f148, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a1669441b73b55d4fa0d5e28f11cfe16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
