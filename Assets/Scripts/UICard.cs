@@ -12,10 +12,10 @@ public class UICard : MonoBehaviour
     public Text name;
 
     private UIShop shopRef;
-    private BodyDatabaseSO.BodyData bodyData;
-    private WeaponDatabaseSO.WeaponData weaponData;
-    private HelmetDatabaseSO.HelmetData helmetData;
-    ChestplateDatabaseSO.ChestplateData chestplateData;
+    public BodyDatabaseSO.BodyData bodyData;
+    public WeaponDatabaseSO.WeaponData weaponData;
+    public HelmetDatabaseSO.HelmetData helmetData;
+    public ChestplateDatabaseSO.ChestplateData chestplateData;
 
     public void Setup(BodyDatabaseSO.BodyData bodyData, HelmetDatabaseSO.HelmetData helmetData, ChestplateDatabaseSO.ChestplateData chestplateData, WeaponDatabaseSO.WeaponData weaponData, UIShop shopRef)
     {

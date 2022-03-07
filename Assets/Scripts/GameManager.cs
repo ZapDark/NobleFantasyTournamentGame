@@ -10,6 +10,10 @@ public class GameManager : Manager<GameManager>
     public ChestplateDatabaseSO chestplateDatabase;
     public WeaponDatabaseSO weaponDatabase;
     
+    public bool Deployed = false;
+    public bool Targeted = false;
+    public bool Fighting = false;
+    
     Dictionary<Team, List<BaseEntity>> entitiesByTeam = new Dictionary<Team, List<BaseEntity>>();
     
     int unitsPerTeam = 3;
@@ -61,8 +65,18 @@ public class GameManager : Manager<GameManager>
             return entitiesByTeam[Team.Team1];
     }
 
-    public void DebugFight()
+    public void Target()
     {
+        if(!Deployed)
+        {
+
+        }
+    }
+
+    public void Fight()
+    {
+        if (!Targeted)
+            return;
         for(int i = 0; i < unitsPerTeam; i++)
         {
             //New unit for team 1
