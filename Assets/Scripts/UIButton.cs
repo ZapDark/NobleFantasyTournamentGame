@@ -16,10 +16,16 @@ public class UIButton : MonoBehaviour
     
     public void OnClick()
     {
-        foreach (Transform card in shopRef.GetChild(0).GetChild(0))
+        if (!GameManager.Instance.Deployed)
         {
-            UICard cardU = card.GetComponent<UICard>();
-            shop.OnCardClick(cardU, cardU.bodyData, cardU.helmetData, cardU.chestplateData, cardU.weaponData);
+            foreach (Transform card in shopRef.GetChild(0).GetChild(0))
+            {
+                if(card.gameObject.activeSelf)
+                {
+                    UICard cardU = card.GetComponent<UICard>();
+                    shop.OnCardClick(cardU, cardU.bodyData, cardU.helmetData, cardU.chestplateData, cardU.weaponData);
+                }
+            }
         }
         button.interactable = false;
     }
