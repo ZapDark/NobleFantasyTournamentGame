@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class GameManager : Manager<GameManager>
@@ -9,6 +10,13 @@ public class GameManager : Manager<GameManager>
     public HelmetDatabaseSO helmetDatabase;
     public ChestplateDatabaseSO chestplateDatabase;
     public WeaponDatabaseSO weaponDatabase;
+
+    public Button targeting;
+    public Button fight;
+    
+    public bool Deployed = false;
+    public bool Targeted = false;
+    public bool Fighting = false;
     
     Dictionary<Team, List<BaseEntity>> entitiesByTeam = new Dictionary<Team, List<BaseEntity>>();
     
@@ -61,8 +69,20 @@ public class GameManager : Manager<GameManager>
             return entitiesByTeam[Team.Team1];
     }
 
-    public void DebugFight()
+    public void Target()
     {
+        if(!Deployed)
+        {
+            return;
+        }
+        Targeted = true;
+        targeting.interactable = false;
+    }
+
+    public void Fight()
+    {
+        if (!Targeted)
+            return;
         for(int i = 0; i < unitsPerTeam; i++)
         {
             //New unit for team 1
@@ -89,6 +109,7 @@ public class GameManager : Manager<GameManager>
 
             newEntity.Setup(Team.Team2, GridManager.Instance.GetFreeNode(Team.Team2));
         }
+        fight.interactable = false;
     }
 }
 

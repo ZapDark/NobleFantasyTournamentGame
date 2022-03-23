@@ -39,6 +39,7 @@ public class UIShop : MonoBehaviour
         //Debug.Log(transform.GetChild(0).GetChild(0).GetComponentsInChildren<Transform>().GetLength(0));
 
         this.gameObject.SetActive(transform.GetChild(0).GetChild(0).GetComponentsInChildren<Transform>().GetLength(0) > 1);
+        GameManager.Instance.Deployed = (transform.GetChild(0).GetChild(0).GetComponentsInChildren<Transform>().GetLength(0) == 1);
         
         GameManager.Instance.OnEntitySelected(bodyCData, helmetCData, chestplateCData, weaponCData);
     }
