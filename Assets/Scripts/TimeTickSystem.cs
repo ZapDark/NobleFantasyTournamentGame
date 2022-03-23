@@ -12,7 +12,7 @@ public class TimeTickSystem : MonoBehaviour
     
     public static event EventHandler<OnTickEventArgs> OnTick;
 
-    private const float TICK_TIMER_MAX = 1/(1 /*Ticks per second*/);
+    private const float TICK_TIMER_MAX = 1f/6f /*1 divided by Ticks per second*/;
 
     private int tick;
     private float tickTimer;
@@ -26,6 +26,7 @@ public class TimeTickSystem : MonoBehaviour
         tickTimer += Time.deltaTime;
         if (tickTimer >= TICK_TIMER_MAX)
         {
+            //Debug.Log(tickTimer);
             tickTimer -= TICK_TIMER_MAX;
             tick++;
             //Debug.Log("tick: " + tick);
