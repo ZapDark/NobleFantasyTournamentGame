@@ -17,11 +17,16 @@ public class BaseEntity : MonoBehaviour
     public int baseDamage = 5;
     public int baseHealth = 100;
 
+    public bool IsRanged => (range > 1);
     public int range = 1;
     public float attackSpeed = 1f; //Attacks per second
     public float movementSpeed = 1f;
 
     public int actionTick = 0;
+
+    public int unitID;
+    public int targetID = -1;
+    public bool targetDead = true;
 
     protected Team myTeam;
     protected BaseEntity currentTarget = null;
@@ -84,6 +89,13 @@ public class BaseEntity : MonoBehaviour
             //Informs the Game Manager
             GameManager.Instance.UnitDead(this);
             destination.SetOccupied(false);
+            var allEnemies = GameManager.Instance.GetEntitiesAgainst(myTeam);
+            BaseEntity entity = null;
+            foreach (BaseEntity e in allEnemies)
+            {
+                if(e.targetID == unitID)
+                    e.targetDead = true;
+            }
         }
     }
 
@@ -94,16 +106,37 @@ public class BaseEntity : MonoBehaviour
 
     protected void FindTarget()
     {
+        if(!targetDead)
+        {
+            if(unitID == 0)
+                targetID = GameManager.Instance.unitAtarget;
+            else if(unitID == 1)
+                targetID = GameManager.Instance.unitBtarget;
+            else
+                targetID = GameManager.Instance.unitCtarget;
+        }
+        
         var allEnemies = GameManager.Instance.GetEntitiesAgainst(myTeam);
         //Debug.Log(allEnemies[0].gameObject.name+", "+allEnemies[1].gameObject.name+", "+allEnemies[2].gameObject.name);
         float minDistance = Mathf.Infinity;
         BaseEntity entity = null;
         foreach (BaseEntity e in allEnemies)
         {
-            if(Vector3.Distance(e.currentNode.mapPosition, this.currentNode.mapPosition) <= minDistance)
+            if(e.unitID == targetID || targetDead)
             {
-                minDistance = Vector3.Distance(e.currentNode.mapPosition, this.currentNode.mapPosition);
-                entity = e;
+                if(!IsRanged)
+                {
+                    if(Vector3.Distance(e.currentNode.mapPosition, this.currentNode.mapPosition) <= minDistance)
+                    {
+                        minDistance = Mathf.Abs(e.currentNode.mapPosition.x - this.currentNode.mapPosition.x);
+                        entity = e;
+                    }
+                }
+                else if(Vector3.Distance(e.currentNode.mapPosition, this.currentNode.mapPosition) <= minDistance)
+                {
+                    minDistance = Vector3.Distance(e.currentNode.mapPosition, this.currentNode.mapPosition);
+                    entity = e;
+                }
             }
         }
 
