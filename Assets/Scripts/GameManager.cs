@@ -6,6 +6,14 @@ using System;
 
 public class GameManager : Manager<GameManager>
 {
+    public Dropdown dropdownA;
+    public Dropdown dropdownB;
+    public Dropdown dropdownC;
+
+    public int unitAtarget = 0;
+    public int unitBtarget = 0;
+    public int unitCtarget = 0;
+
     public BodyDatabaseSO bodyDatabase;
     public HelmetDatabaseSO helmetDatabase;
     public ChestplateDatabaseSO chestplateDatabase;
@@ -17,6 +25,9 @@ public class GameManager : Manager<GameManager>
     public bool Deployed = false;
     public bool Targeted = false;
     public bool Fighting = false;
+
+    private int allyCount = 0;
+    private int enemyCount = 0;
     
     Dictionary<Team, List<BaseEntity>> entitiesByTeam = new Dictionary<Team, List<BaseEntity>>();
     
@@ -31,6 +42,27 @@ public class GameManager : Manager<GameManager>
         // Create the 2 teams.
         entitiesByTeam.Add(Team.Team1, new List<BaseEntity>());
         entitiesByTeam.Add(Team.Team2, new List<BaseEntity>());
+
+        dropdownA.onValueChanged.AddListener(delegate {DropdownAChanged(dropdownA);});
+        dropdownB.onValueChanged.AddListener(delegate {DropdownBChanged(dropdownB);});
+        dropdownC.onValueChanged.AddListener(delegate {DropdownCChanged(dropdownC);});
+        
+        dropdownA.transform.parent.gameObject.SetActive(false);
+    }
+
+    private void DropdownAChanged(Dropdown change)
+    {
+        unitAtarget = change.value - 1;
+    }
+
+    private void DropdownBChanged(Dropdown change)
+    {
+        unitBtarget = change.value - 1;
+    }
+
+    private void DropdownCChanged(Dropdown change)
+    {
+        unitCtarget = change.value - 1;
     }
 
     public void OnEntitySelected(BodyDatabaseSO.BodyData bodyData, HelmetDatabaseSO.HelmetData helmetData, ChestplateDatabaseSO.ChestplateData chestplateData, WeaponDatabaseSO.WeaponData weaponData)
@@ -48,6 +80,10 @@ public class GameManager : Manager<GameManager>
         newEntity.chestpiece.sprite = chestplateData.chestpiece;
         newEntity.weapon.sprite = weaponData.weapon;
         newEntity.weaponName = weaponData.name;
+
+        newEntity.unitID = allyCount;
+        allyCount++;
+        newEntity.targetDead = false;
 
         entitiesByTeam[Team.Team1].Add(newEntity);
 
@@ -72,9 +108,10 @@ public class GameManager : Manager<GameManager>
     public void Target()
     {
         if(!Deployed)
-        {
             return;
-        }
+
+        dropdownA.transform.parent.gameObject.SetActive(true);
+
         Targeted = true;
         targeting.interactable = false;
     }
@@ -83,6 +120,7 @@ public class GameManager : Manager<GameManager>
     {
         if (!Targeted)
             return;
+        dropdownA.transform.parent.gameObject.SetActive(false);
         for(int i = 0; i < unitsPerTeam; i++)
         {
             //New unit for team 1
@@ -105,6 +143,10 @@ public class GameManager : Manager<GameManager>
             newEntity.weapon.sprite = weaponData.weapon;
             newEntity.weaponName = weaponData.name;
 
+            newEntity.unitID = enemyCount;
+            enemyCount++;
+            newEntity.targetDead = true;
+            
             entitiesByTeam[Team.Team2].Add(newEntity);
 
             newEntity.Setup(Team.Team2, GridManager.Instance.GetFreeNode(Team.Team2));
