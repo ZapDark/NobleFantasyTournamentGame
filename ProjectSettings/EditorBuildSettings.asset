@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TournamentScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Inventory.unity
+    guid: b30657ca5dffd1243a7dfa4a1e861880
   m_configObjects: {}
