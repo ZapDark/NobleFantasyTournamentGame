@@ -11,8 +11,10 @@ public class Slot : MonoBehaviour, IPointerClickHandler//, IPointerEnterHandler,
     [SerializeField] Image image;
     [SerializeField] NFTDisplay display;
 
+
     public event Action<NFTS> OnLeftClickEvent;
     private NFTS _nft;
+    private UICard uiCard;
     public NFTS nft
     {
         get { return _nft; }
@@ -30,7 +32,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler//, IPointerEnterHandler,
             }
         }
     }
-    
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if(eventData != null && eventData.button == PointerEventData.InputButton.Left)
